@@ -7,13 +7,11 @@ from rerank import rerank
 
 if __name__ == '__main__':
      parser = argparse.ArgumentParser(description='CARROT Framework Parser')
-     parser.add_argument('--input', type=str, default="./ChineseRecipes/examples.tsv", help='path to chinese recipe file, the text should be title \t ingredients \t steps')
-     parser.add_argument('--output', type=str, default=None, help='path to output file')
-     parser.add_argument('--index', type=str, default="./index/all-mpnet-base-v2.index",  help='faiss Documents index path')
-     parser.add_argument('--document', type=str, default="./EnglishRecipes/english_recipes.tsv", help='English Recieps DataBase tsv, the text should be index \t title \t ingredients \t steps')
+     parser.add_argument('--chinese_recipes', type=str, default="./ChineseRecipes/test_set.tsv", help='path to chinese recipe file, the text should be title \t ingredients \t steps')
+     parser.add_argument('--english_recipes', type=str, default="./EnglishRecipes/english_recipes.tsv", help='English Recieps DataBase tsv, the text should be index \t title \t ingredients \t steps')
+     parser.add_argument('--english_recipes_index', type=str, default="./index/all-mpnet-base-v2.index",  help='faiss Documents index path')
 
      parser.add_argument('--retrieval_model_name', type=str, default='all-mpnet-base-v2', help='retrieval model name')
-     parser.add_argument('--retrieval_model_dimension', type=int, default=768, help='dimension of retrieval model')
      parser.add_argument('--retrieval_cutoff', type=int, default=10, help='number of retrieval results per query')
      parser.add_argument('--max_per_document_length', type=int, default=300, help='max_length_each_recipe')
 
