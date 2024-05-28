@@ -35,7 +35,10 @@ def get_retrieve_results(querys, index_file_path, english_recipes, modelName, re
     for indices in I:
         result = []
         for _, index in enumerate(indices):
-            result.append(english_recipes[index])
+            try:
+                result.append(english_recipes[index])
+            except:
+                pass
         results.append(result)
 
     return results

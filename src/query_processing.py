@@ -16,8 +16,8 @@ def load_translate_model(model_id):
 def load_llm_model(model_id):
     global llm_tokenizer, llm_model
     api_token = "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"
-    llm_tokenizer = AutoTokenizer.from_pretrained(model_id, token=api_token)
-    llm_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto", token = api_token)
+    llm_tokenizer = AutoTokenizer.from_pretrained(model_id, token=api_token, trust_remote_code=True)
+    llm_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto", token = api_token, trust_remote_code=True)
 
 def translate_query(query, model_id):
     global translate_tokenizer, translate_model
@@ -35,8 +35,8 @@ def request_llm(templete, request, model_id):
         load_llm_model(model_id)
     messages = [{"role": "system", "content": templete}, {"role": "user", "content": request}]   
     input_ids = llm_tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt").to(device)
-    terminators = [llm_tokenizer.eos_token_id, llm_tokenizer.convert_tokens_to_ids("<|eot_id|>")]
-    outputs = llm_model.generate(input_ids, max_new_tokens=256, eos_token_id=terminators, do_sample=False)
+    #terminators = [llm_tokenizer.eos_token_id, llm_tokenizer.convert_tokens_to_ids("<|eot_id|>")]
+    outputs = llm_model.generate(input_ids, max_new_tokens=256)#, eos_token_id=terminators)
     response = outputs[0][input_ids.shape[-1]:]
     response = llm_tokenizer.decode(response, skip_special_tokens=True)
     return response

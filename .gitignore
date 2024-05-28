@@ -1,3 +1,4 @@
-EnglishRecipes/
-index/
+EnglishRecipes/*
+index/*
 src/__pycache__/
+results/
