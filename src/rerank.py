@@ -62,7 +62,7 @@ def request_llm_rerank(messages, model_id):
         print (f"Error in rerank, response: {response}")
     return id
 
-def rerank(documents, query, ingredient, step, model_id, relevance_instructions, max_length):
+def rerank_top1(documents, query, ingredient, step, model_id, relevance_instructions, max_length):
     rerank_query = "标题: " + query +"\t" + "原料: " + ingredient + "\t" + "步骤: " + step
     rerank_query = rerank_query[:max_length]
     messages = create_permutation_instruction(rerank_query, len(documents), documents, relevance_instructions, max_length)

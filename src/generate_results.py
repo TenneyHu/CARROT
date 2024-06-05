@@ -12,8 +12,10 @@ def load_llm_model(model_id):
 
 def get_prompt(query):
     templete = "Convert the provided Chinese recipe into an English recipe"
-    templete += "so that it fits within Western cooking culture, "
-    templete += "with Western cooking knowledge, and meets is consistent a Western recipe’s style."
+    templete += " so that it fits within Western cooking culture, "
+    templete += " with Western cooking knowledge, and meets is consistent a Western recipe’s style."
+    templete += " The output format should be: Title: [English Recipe Title] + Ingredients: [English Recipe Ingredients] + Steps: [English Recipe Steps]"
+    templete += " Please only output the title, ingredients, and steps in English, do not add any other content."
     return [
         {'role': 'system',
             'content': f"{templete}"

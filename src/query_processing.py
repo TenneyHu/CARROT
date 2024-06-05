@@ -50,3 +50,8 @@ def query_adaptation(title, model_id):
     templete = "This is a Chinese recipe title, rewritten to fit English cultural conventions"
     request = "Title: " + title + " Please only output the english recipe title, do not add any other content."
     return request_llm(templete, request, model_id)
+
+def del_llm():
+    global llm_tokenizer, llm_model
+    llm_tokenizer = None
+    llm_model = None
